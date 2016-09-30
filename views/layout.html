@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='/bootstrap/dist/css/bootstrap.css' />
+  </head>
+  <body>
+    <div class='container'>
+      <ul class='nav nav-tabs'>
+        <li>
+          <a href='/'>Home</a>
+        </li>
+        {% if user %}
+          <li>
+            <a href='/restricted'>Restricted</a>
+          </li>
+          <li>
+            <form method='POST' action='/sessions?_method=DELETE'>
+              <button type='submit' class='btn btn-warning'>Logout {{ user.name }}</button>
+            </form>
+          </li>
+        {% endif %}
+        {% if !user %}
+        <li>
+          <a href='/login'>Login</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% block content %}
+      <div class='well'>
+        Welcome to the Auth App!
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>
